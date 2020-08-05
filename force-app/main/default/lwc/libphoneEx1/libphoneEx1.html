@@ -1,0 +1,66 @@
+<!-- Libphone Ex 1 -->
+<template>
+    <article class="slds-box slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:call" size="small"></lightning-icon>
+                </div>
+                <div class="slds-section__title slds-media__body">
+                  <span class="slds-text-body_regular slds-card__header-title slds-truncate" title="Section Title">
+                    The "FORMAT VALID" button will be enabled only when<br/>
+                    the phone number is valid. Otherwise, disabled.
+                  </span>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-box">
+            <div class="slds-section">
+                <div class="slds-form">
+                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                        <span class="slds-form-element__label">Country</span>
+                        <div class="slds-form-element__control">
+                            <lightning-combobox class="country" label="" value="US" variant="label-hidden" options={countries}></lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                        <span class="slds-form-element__label">Phone number</span>
+                        <div class="slds-form-element__control">
+                            <lightning-input class="phone" type="tel" label="" variant="label-hidden" value="800-667-6389" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                             onblur={handleBlur}></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-m-vertical_large">
+                        <div class="slds-form-element__control slds-align_absolute-center">
+                            <lightning-button variant="brand" label="FORMAT VALID" title="Primary action" disabled={disabled} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <template if:true={hasData}>
+                <div class="slds-grid slds-grid_align-center">
+                    <div class="slds-col">
+                        <div class="slds-m-around_large">
+                            <h2 class="slds-text-heading_large">Phone number in different formats</h2>
+                        </div>
+                        <div class="slds-m-vertical_small slds-m-horizontal_large">
+                            <p class="slds-text-color_weak"><span>E164:</span> {phoneInfo.E164}</p>
+                        </div>
+                        <div class="slds-m-vertical_small slds-m-horizontal_large">
+                            <p class="slds-text-color_weak"><span>INTERNATIONAL:</span> {phoneInfo.INTERNATIONAL}</p>
+                        </div>
+                        <div class="slds-m-vertical_small slds-m-horizontal_large">
+                            <p class="slds-text-color_weak"><span>NATIONAL:</span> {phoneInfo.NATIONAL}</p>
+                        </div>
+                        <div class="slds-m-vertical_small slds-m-horizontal_large">
+                            <p class="slds-text-color_weak"><span>RFC3966:</span> {phoneInfo.RFC3966}</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </article>
+</template>
